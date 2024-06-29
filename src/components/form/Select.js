@@ -4,7 +4,12 @@ function Select({ text, name, options, handleOnChange, value }) {
     return (
         <div className={styles.select_control}>
             <label htmlFor={name}>{text}:</label>
-            <select name={name} id={name} defaultValue={'Default'}>
+            <select 
+                name={name} 
+                id={name} 
+                defaultValue={'Default'} 
+                onChange={handleOnChange}
+            >
                 <option disabled value="Default">Selecione uma opção</option>
                 {options.map((option) => (
                     <option
