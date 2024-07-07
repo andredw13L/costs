@@ -1,59 +1,48 @@
 {
   "projects": [
     {
-      "id": "d889",
-      "name": "g",
+      "name": "Infra",
       "budget": "1",
+      "category": {
+        "id": "1",
+        "name": "Infra"
+      },
+      "cost": 0,
+      "services": [],
+      "id": 1
+    },
+    {
+      "name": "Desenvolvimento",
+      "budget": "2",
+      "category": {
+        "id": "2",
+        "name": "Desenvolvimento"
+      },
+      "cost": 0,
+      "services": [],
+      "id": 2
+    },
+    {
+      "name": "Design",
+      "budget": "3",
       "category": {
         "id": "3",
-        "name": 3
+        "name": "Design"
       },
       "cost": 0,
-      "services": []
+      "services": [],
+      "id": 3
     },
     {
-      "id": "e7ec",
-      "name": "aaa",
-      "budget": "1234",
+      "name": "Planejamento",
+      "budget": "4",
       "category": {
-        "id": "2",
-        "name": 2
+        "id": "4",
+        "name": "Planejamento"
       },
       "cost": 0,
-      "services": []
-    },
-    {
-      "id": "707f",
-      "name": "assaA",
-      "budget": "456155",
-      "category": {
-        "id": "2",
-        "name": 2
-      },
-      "cost": 0,
-      "services": []
-    },
-    {
-      "id": "225f",
-      "name": "asdsadasdas",
-      "budget": "515615151",
-      "category": {
-        "id": "2",
-        "name": 2
-      },
-      "cost": 0,
-      "services": []
-    },
-    {
-      "id": "3151",
-      "name": "Message",
-      "budget": "1",
-      "category": {
-        "id": "2",
-        "name": 2
-      },
-      "cost": 0,
-      "services": []
+      "services": [],
+      "id": 4
     }
   ],
   "categories": [
