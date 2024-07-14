@@ -1,10 +1,12 @@
 import { useParams } from 'react-router-dom'
+import { parse, v4 as uuidv4 } from 'uuid'
 import styles from './Project.module.css'
 import { useEffect, useState } from 'react'
 import Loading from "../layouts/Loading"
 import Container from "../layouts/Container";
 import ProjectForm from '../projects/ProjectForm'
 import Message from "../layouts/Message";
+import ServiceForm from '../services/ServiceForm';
 
 function Project() {
 
@@ -37,9 +39,57 @@ function Project() {
         }, );
     }, [id]);
 
+
+    function createService(project) {
+
+        // Atualizar a mensagem em caso de nova requisição
+        setMessage('')
+
+        const lastService = project.services[project.services.length  - 1]
+
+        lastService.id = uuidv4()
+
+        const lastServiceCost = lastService.cost
+
+        const newCost = parseFloat(project.cost) + parseFloat(lastServiceCost)
+
+        // Validação se o budget fo excedido
+        if(newCost > parseFloat(project.budget)) {
+            setMessage('Orçamento ultrapassado, verifique o valor do serviço')
+            setTypeMessage('error')
+            project.services.pop()
+            return false
+        }
+
+        // Adicionar o service cost  do projeto para o total cost
+        project.cost = newCost
+
+        fetch(`http://localhost:5000/projects/${project.id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify(project)
+        })
+        .then((resp) => {
+            if (!resp.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return resp.json()
+        })
+        .then(data => {
+            // Exibir os serviços
+            console.log(data)
+        })
+        .catch((err) => console.log(err))
+
+    }
+
+
     function toggleProjectForm() {
         setShowProjectForm(!showProjectForm)
     }
+
 
     function toggleServiceForm() {
         setShowServiceForm(!showServiceForm)
@@ -47,6 +97,7 @@ function Project() {
 
     function editPost(project) {
 
+        // Atualizar a mensagem em caso de nova requisição
         setMessage('')
 
         // Validação do budget
@@ -118,7 +169,13 @@ function Project() {
                             {!showServiceForm ? 'Adicionar serviço' : 'Fechar'}
                         </button>
                         <div className={styles.project_info}>
-                            {showServiceForm && <div>Formulário</div>}
+                            {showServiceForm && (
+                                <ServiceForm 
+                                    handleSubmit={createService}
+                                    btnText="Adicionar serviço"
+                                    projectData={project}
+                                />
+                            )}
                         </div>
                         <h2>Serviços</h2>
                         <Container customClass="start">
