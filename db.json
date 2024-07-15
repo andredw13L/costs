@@ -7,8 +7,15 @@
         "id": "3",
         "name": "Design"
       },
-      "cost": 0,
-      "services": [],
+      "cost": 10,
+      "services": [
+        {
+          "name": "Primeiro",
+          "cost": "10",
+          "description": "Teste",
+          "id": "5e9afc34-4a7e-45d7-84e8-e5696f79c2f6"
+        }
+      ],
       "id": 1
     },
     {
